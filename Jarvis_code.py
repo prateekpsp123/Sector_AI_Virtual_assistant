@@ -22,3 +22,4 @@ def wishMe():
 if __name__ == "__main__":
     wishMe()
     speak("Hope you are doing well, tell me what can i do for you ?")    
+    print("hello")
