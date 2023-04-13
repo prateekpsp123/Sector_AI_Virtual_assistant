@@ -2,6 +2,8 @@ import pyttsx3
 import speech_recognition as sr
 import datetime
 import wikipedia
+
+
 name = "Prateek"
 what_to_call = "sir"
 engine = pyttsx3.init('sapi5')
@@ -44,9 +46,18 @@ if __name__ == "__main__":
         query = take_Command().lower()
 
         #Logic for executing the task 
-        if "what" in query or "who" in query or "tell" in query or "which" in query: 
-            speak("sure sir, searching about this")
+        if "stop" in query:
+            speak(f"i think you have said stop {what_to_call}, now i will stop to listen until you want")
+            break
+
+        if query == "what is your name" or query == "what's your name":
+            result = "Thankyou for taking interest in me, well my name is Jarvis and i am a virtual assistant"
+            speak(result)
+
+        elif "what" in query or "who" in query or "tell" in query or "which" in query or "how" in query: 
+            speak(f"sure {what_to_call}, searching about this")
             query = query.replace("wikipedia","")
             result = wikipedia.summary(query, sentences=2)
             speak("This is what i found !")
             speak(result)
+
