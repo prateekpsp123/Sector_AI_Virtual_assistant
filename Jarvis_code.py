@@ -3,9 +3,10 @@ import speech_recognition as sr
 import datetime
 import wikipedia
 
+time_query = ["what is the time", "tell me about the time", "tell me the current time", "what is time"]
 
-name = "Prateek"
-what_to_call = "sir"
+name = "Nidha"
+what_to_call = "mam"
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 # print(voices)
@@ -53,11 +54,22 @@ if __name__ == "__main__":
         if query == "what is your name" or query == "what's your name":
             result = "Thankyou for taking interest in me, well my name is Jarvis and i am a virtual assistant"
             speak(result)
+        
+        elif query in time_query:
+            hour = datetime.datetime.now().hour
+            min = datetime.datetime.now().minute
+            if hour > 13:
+                audio = f"the current time is {hour%12} {min} pm"
+            else: 
+                audio = f"the current time is {hour} {min} am"
+            speak(audio)
 
-        elif "what" in query or "who" in query or "tell" in query or "which" in query or "how" in query: 
+        elif "what" in query or "who" in query or "tell me what is" in query or "which" in query or "how" in query: 
             speak(f"sure {what_to_call}, searching about this")
             query = query.replace("wikipedia","")
             result = wikipedia.summary(query, sentences=2)
             speak("This is what i found !")
             speak(result)
+        
+
 
